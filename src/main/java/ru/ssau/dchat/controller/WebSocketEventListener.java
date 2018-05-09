@@ -37,7 +37,7 @@ public class WebSocketEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
         if(username != null) {
             logger.info("User Disconnected : " + username);
-            messagingTemplate.convertAndSend("/topic/public", new Message("Leave", username));
+            messagingTemplate.convertAndSend("/topic/public", new Message("Leave", username, Message.MessageType.LEAVE));
         }
     }
 }

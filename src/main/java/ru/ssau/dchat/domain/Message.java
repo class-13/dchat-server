@@ -9,11 +9,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Message {
-    private String message;
+    private String content;
     private String sender;
+    private MessageType type;
 
-    public Message(String message, String sender) {
-        this.message = message;
+    public enum MessageType {
+        CHAT,
+        JOIN,
+        LEAVE
+    }
+
+    public Message(String content, String sender, MessageType type) {
+        this.content = content;
         this.sender = sender;
+        this.type = type;
     }
 }
