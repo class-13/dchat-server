@@ -11,6 +11,9 @@ import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import ru.ssau.dchat.domain.Message;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 /**
  * Created by Вячеслав on 01.05.2018.
  */
@@ -37,7 +40,7 @@ public class WebSocketEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
         if(username != null) {
             logger.info("User Disconnected : " + username);
-            messagingTemplate.convertAndSend("/topic/public", new Message("Leave", username, Message.MessageType.LEAVE));
+            messagingTemplate.convertAndSend("/topic/public", new Message("Leave", username, Message.MessageType.LEAVE, Date.valueOf(LocalDate.now()).toString()));
         }
     }
 }
